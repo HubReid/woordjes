@@ -12,7 +12,6 @@
     --primary: #f582ae;
     --primary-dark: #d44e81;
     --secondary: #8bd3dd;
-    --accent: #ffd166;
     --success: #06d6a0;
     --danger: #ef476f;
     --text: #1a1a2e;
@@ -25,7 +24,6 @@
   body::before, body::after { content:''; position:fixed; border-radius:50%; z-index:0; pointer-events:none; }
   body::before { width:400px;height:400px; background:radial-gradient(circle,#f582ae33,transparent 70%); top:-100px;left:-100px; }
   body::after { width:350px;height:350px; background:radial-gradient(circle,#8bd3dd33,transparent 70%); bottom:-80px;right:-80px; }
-
   #app { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:20px; }
 
   /* HEADER */
@@ -35,68 +33,92 @@
   .parent-btn { position:absolute; top:28px; right:0; background:var(--surface); border:2px solid #e0e0e0; border-radius:50px; padding:8px 16px; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.82rem; cursor:pointer; color:var(--text-light); transition:all 0.2s; box-shadow:var(--shadow); }
   .parent-btn:hover { border-color:var(--primary); color:var(--primary-dark); }
 
+  /* ===== THEME PICKER ===== */
+  #theme-screen { padding:10px 0 30px; }
+  .theme-screen-title { font-family:'Baloo 2',cursive; font-size:1.3rem; font-weight:800; margin-bottom:6px; color:var(--text); }
+  .theme-screen-sub { color:var(--text-light); font-size:0.88rem; margin-bottom:20px; }
+
+  .year-group { margin-bottom:28px; }
+  .year-label { font-size:0.75rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); margin-bottom:12px; padding-bottom:6px; border-bottom:2px solid #eee; }
+
+  .theme-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-bottom:12px; }
+  .theme-card { background:var(--surface); border:3px solid transparent; border-radius:var(--radius); padding:20px 16px; cursor:pointer; transition:all 0.2s; box-shadow:var(--shadow); text-align:left; font-family:'Nunito',sans-serif; position:relative; overflow:hidden; }
+  .theme-card::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; }
+  .theme-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.15); }
+  .theme-card .tc-emoji { font-size:2rem; margin-bottom:8px; display:block; }
+  .theme-card .tc-title { font-weight:800; font-size:1rem; color:var(--text); }
+  .theme-card .tc-meta { font-size:0.75rem; color:var(--text-light); margin-top:4px; }
+  .theme-card .tc-count { font-size:0.75rem; font-weight:800; margin-top:8px; display:inline-block; padding:3px 10px; border-radius:50px; background:#f0f0f8; color:var(--text-light); }
+
+  .all-words-card { background:linear-gradient(135deg,#1a1a2e,#2d2b55); color:white; border:none; }
+  .all-words-card .tc-title { color:white; }
+  .all-words-card .tc-meta { color:rgba(255,255,255,0.6); }
+  .all-words-card .tc-count { background:rgba(255,255,255,0.15); color:white; }
+  .all-words-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(26,26,46,0.4); }
+
+  /* BACK BTN */
+  .back-bar { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .back-btn { background:var(--surface); border:2px solid #e0e0e0; border-radius:50px; padding:8px 18px; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.85rem; cursor:pointer; color:var(--text-light); transition:all 0.2s; box-shadow:var(--shadow); display:flex; align-items:center; gap:6px; }
+  .back-btn:hover { border-color:var(--primary); color:var(--primary-dark); }
+  .active-theme-badge { font-size:0.85rem; font-weight:700; color:var(--text-light); }
+  .active-theme-badge strong { color:var(--text); }
+
   /* STATS BAR */
-  .stats-bar { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:20px; }
-  .stat-chip { background:var(--surface); border-radius:50px; padding:8px 18px; font-size:0.85rem; font-weight:700; box-shadow:var(--shadow); display:flex; align-items:center; gap:6px; }
-  .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
-  .dot-total { background:var(--secondary); }
-  .dot-learned { background:var(--success); }
-  .dot-mistakes { background:var(--danger); }
+  .stats-bar { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:20px; }
+  .stat-chip { background:var(--surface); border-radius:50px; padding:7px 16px; font-size:0.83rem; font-weight:700; box-shadow:var(--shadow); display:flex; align-items:center; gap:6px; }
+  .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .dot-total{background:var(--secondary);} .dot-learned{background:var(--success);} .dot-mistakes{background:var(--danger);}
 
   /* MODE SELECTOR */
-  .mode-selector { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:28px; }
-  .mode-btn { background:var(--surface); border:3px solid transparent; border-radius:var(--radius); padding:18px 12px; cursor:pointer; text-align:center; transition:all 0.2s; box-shadow:var(--shadow); font-family:'Nunito',sans-serif; }
+  .mode-selector { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:24px; }
+  .mode-btn { background:var(--surface); border:3px solid transparent; border-radius:var(--radius); padding:16px 12px; cursor:pointer; text-align:center; transition:all 0.2s; box-shadow:var(--shadow); font-family:'Nunito',sans-serif; }
   .mode-btn:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.15); }
   .mode-btn.active { border-color:var(--primary); background:#fff0f6; }
-  .mode-btn .mode-icon { font-size:2rem; display:block; margin-bottom:6px; }
-  .mode-btn .mode-name { font-weight:800; font-size:0.92rem; color:var(--text); }
-  .mode-btn .mode-desc { font-size:0.73rem; color:var(--text-light); margin-top:3px; }
+  .mode-btn .mode-icon { font-size:1.9rem; display:block; margin-bottom:6px; }
+  .mode-btn .mode-name { font-weight:800; font-size:0.88rem; color:var(--text); }
+  .mode-btn .mode-desc { font-size:0.7rem; color:var(--text-light); margin-top:3px; }
 
   /* FILTER BAR */
-  .filter-bar { display:flex; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
-  .filter-bar label { font-weight:700; font-size:0.9rem; }
-  .filter-toggle { background:var(--surface); border:2px solid var(--secondary); border-radius:50px; padding:6px 16px; font-family:'Nunito',sans-serif; font-weight:700; font-size:0.85rem; cursor:pointer; transition:all 0.2s; color:var(--text); }
+  .filter-bar { display:flex; align-items:center; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
+  .filter-bar label { font-weight:700; font-size:0.88rem; }
+  .filter-toggle { background:var(--surface); border:2px solid var(--secondary); border-radius:50px; padding:5px 14px; font-family:'Nunito',sans-serif; font-weight:700; font-size:0.82rem; cursor:pointer; transition:all 0.2s; color:var(--text); }
   .filter-toggle.active { background:var(--secondary); color:white; border-color:var(--secondary); }
 
   /* GAME AREA */
-  .game-area { min-height:420px; }
+  .game-area { min-height:400px; }
 
   /* FLASHCARD */
-  .flashcard-wrap { perspective:1200px; cursor:pointer; max-width:540px; margin:0 auto 24px; }
-  .flashcard { width:100%; min-height:240px; position:relative; transform-style:preserve-3d; transition:transform 0.55s cubic-bezier(0.4,0,0.2,1); border-radius:var(--radius); }
+  .flashcard-wrap { perspective:1200px; cursor:pointer; max-width:540px; margin:0 auto 22px; }
+  .flashcard { width:100%; min-height:230px; position:relative; transform-style:preserve-3d; transition:transform 0.55s cubic-bezier(0.4,0,0.2,1); border-radius:var(--radius); }
   .flashcard.flipped { transform:rotateY(180deg); }
-  .card-face { position:absolute; inset:0; border-radius:var(--radius); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 36px; backface-visibility:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.12); text-align:center; }
+  .card-face { position:absolute; inset:0; border-radius:var(--radius); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:30px 34px; backface-visibility:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.12); text-align:center; }
   .card-front { background:linear-gradient(135deg,#fff0f6,#fce4ec); border:3px solid #f9c3d8; }
   .card-back { background:linear-gradient(135deg,#e0f7f4,#b2ebf2); border:3px solid #80d8d0; transform:rotateY(180deg); }
-  .card-label { font-size:0.72rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); margin-bottom:14px; }
-  .card-word { font-family:'Baloo 2',cursive; font-size:1.9rem; font-weight:800; color:var(--text); line-height:1.2; }
+  .card-label { font-size:0.7rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); margin-bottom:12px; }
+  .card-word { font-family:'Baloo 2',cursive; font-size:1.8rem; font-weight:800; color:var(--text); line-height:1.2; }
   .card-def { font-size:1rem; color:var(--text); line-height:1.6; font-weight:600; }
-  .card-hint { font-size:0.8rem; color:var(--text-light); margin-top:12px; animation:pulse 2s infinite; }
+  .card-hint { font-size:0.78rem; color:var(--text-light); margin-top:12px; animation:pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
-  .flashcard-nav { display:flex; align-items:center; justify-content:center; gap:20px; margin-bottom:14px; }
-  .nav-btn { background:var(--surface); border:2px solid #e0e0e0; border-radius:50%; width:46px; height:46px; font-size:1.2rem; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow); }
+  .flashcard-nav { display:flex; align-items:center; justify-content:center; gap:20px; margin-bottom:12px; }
+  .nav-btn { background:var(--surface); border:2px solid #e0e0e0; border-radius:50%; width:44px; height:44px; font-size:1.1rem; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow); }
   .nav-btn:hover { background:var(--primary); border-color:var(--primary); color:white; }
   .nav-btn:disabled { opacity:0.3; cursor:default; }
   .card-counter { font-weight:800; font-size:1rem; color:var(--text-light); min-width:80px; text-align:center; }
   .flashcard-actions { display:flex; justify-content:center; gap:12px; margin-top:8px; }
-  .action-btn { padding:10px 22px; border-radius:50px; border:none; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.9rem; cursor:pointer; transition:all 0.2s; box-shadow:var(--shadow); }
+  .action-btn { padding:9px 20px; border-radius:50px; border:none; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.88rem; cursor:pointer; transition:all 0.2s; box-shadow:var(--shadow); }
   .action-btn:hover { transform:translateY(-2px); }
-  .btn-wrong { background:#ffe0e6; color:var(--danger); }
-  .btn-right { background:#d0f8ef; color:#00876a; }
-  .btn-primary { background:var(--primary); color:white; }
-  .btn-secondary { background:var(--secondary); color:white; }
-  .btn-dark { background:var(--text); color:white; }
+  .btn-wrong{background:#ffe0e6;color:var(--danger);} .btn-right{background:#d0f8ef;color:#00876a;} .btn-primary{background:var(--primary);color:white;} .btn-secondary{background:var(--secondary);color:white;}
 
   /* PROGRESS */
-  .progress-wrap { background:#e8e8e8; border-radius:50px; height:10px; margin-bottom:20px; overflow:hidden; }
+  .progress-wrap { background:#e8e8e8; border-radius:50px; height:9px; margin-bottom:18px; overflow:hidden; }
   .progress-fill { height:100%; background:linear-gradient(90deg,var(--primary),var(--secondary)); border-radius:50px; transition:width 0.4s ease; }
 
   /* QUIZ */
-  .quiz-question { background:var(--surface); border-radius:var(--radius); padding:28px 32px; text-align:center; box-shadow:var(--shadow); margin-bottom:18px; border:3px solid #f0e0f8; }
-  .quiz-question .q-label { font-size:0.72rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); margin-bottom:10px; }
-  .quiz-question .q-text { font-size:1.1rem; font-weight:600; color:var(--text); line-height:1.6; }
-  .quiz-options { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
-  .option-btn { background:var(--surface); border:3px solid #e0e0e0; border-radius:14px; padding:14px 12px; font-family:'Nunito',sans-serif; font-weight:700; font-size:0.88rem; cursor:pointer; transition:all 0.2s; text-align:left; line-height:1.4; color:var(--text); }
+  .quiz-question { background:var(--surface); border-radius:var(--radius); padding:26px 30px; text-align:center; box-shadow:var(--shadow); margin-bottom:16px; border:3px solid #f0e0f8; }
+  .quiz-question .q-label { font-size:0.7rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); margin-bottom:10px; }
+  .quiz-question .q-text { font-size:1.08rem; font-weight:600; color:var(--text); line-height:1.6; }
+  .quiz-options { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .option-btn { background:var(--surface); border:3px solid #e0e0e0; border-radius:14px; padding:13px 11px; font-family:'Nunito',sans-serif; font-weight:700; font-size:0.86rem; cursor:pointer; transition:all 0.2s; text-align:left; line-height:1.4; color:var(--text); }
   .option-btn:hover:not(:disabled) { border-color:var(--primary); background:#fff0f6; }
   .option-btn.correct { border-color:var(--success); background:#d0f8ef; color:#00512e; animation:popIn 0.3s; }
   .option-btn.wrong { border-color:var(--danger); background:#ffe0e6; color:#8b0022; animation:shake 0.4s; }
@@ -105,115 +127,92 @@
   @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
 
   /* MATCH */
-  .matching-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
-  .match-col { display:flex; flex-direction:column; gap:10px; }
-  .match-item { background:var(--surface); border:3px solid #e0e0e0; border-radius:14px; padding:12px 14px; font-family:'Nunito',sans-serif; font-weight:700; font-size:0.85rem; cursor:pointer; transition:all 0.2s; line-height:1.4; color:var(--text); text-align:center; min-height:58px; display:flex; align-items:center; justify-content:center; }
-  .match-item.word-item { background:linear-gradient(135deg,#fff0f6,#fce4ec); border-color:#f9c3d8; font-family:'Baloo 2',cursive; font-size:0.95rem; }
-  .match-item.def-item { background:linear-gradient(135deg,#f0f4ff,#e8ecff); border-color:#c5cff8; font-size:0.77rem; font-weight:600; }
+  .matching-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .match-col { display:flex; flex-direction:column; gap:9px; }
+  .match-item { background:var(--surface); border:3px solid #e0e0e0; border-radius:13px; padding:11px 13px; font-family:'Nunito',sans-serif; font-weight:700; font-size:0.83rem; cursor:pointer; transition:all 0.2s; line-height:1.4; color:var(--text); text-align:center; min-height:54px; display:flex; align-items:center; justify-content:center; }
+  .match-item.word-item { background:linear-gradient(135deg,#fff0f6,#fce4ec); border-color:#f9c3d8; font-family:'Baloo 2',cursive; font-size:0.92rem; }
+  .match-item.def-item { background:linear-gradient(135deg,#f0f4ff,#e8ecff); border-color:#c5cff8; font-size:0.75rem; font-weight:600; }
   .match-item.selected { border-color:var(--primary); background:#ffd6e7; transform:scale(1.03); }
   .match-item.matched { border-color:var(--success); background:#d0f8ef; cursor:default; opacity:0.7; }
   .match-item.wrong-match { border-color:var(--danger); background:#ffe0e6; animation:shake 0.4s; }
 
   /* TYPE */
-  .type-input-wrap { display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
-  .type-input { flex:1; min-width:200px; padding:13px 18px; border:3px solid #e0e0e0; border-radius:50px; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700; color:var(--text); background:var(--surface); outline:none; transition:border-color 0.2s; }
+  .type-input-wrap { display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .type-input { flex:1; min-width:200px; padding:12px 17px; border:3px solid #e0e0e0; border-radius:50px; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700; color:var(--text); background:var(--surface); outline:none; transition:border-color 0.2s; }
   .type-input:focus { border-color:var(--primary); }
-  .type-input.correct-input { border-color:var(--success); background:#d0f8ef; }
-  .type-input.wrong-input { border-color:var(--danger); background:#ffe0e6; }
-  .type-submit { background:var(--primary); color:white; border:none; border-radius:50px; padding:13px 26px; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; cursor:pointer; transition:all 0.2s; box-shadow:var(--shadow); }
+  .type-input.correct-input{border-color:var(--success);background:#d0f8ef;} .type-input.wrong-input{border-color:var(--danger);background:#ffe0e6;}
+  .type-submit { background:var(--primary); color:white; border:none; border-radius:50px; padding:12px 24px; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; cursor:pointer; transition:all 0.2s; box-shadow:var(--shadow); }
   .type-submit:hover { background:var(--primary-dark); }
   .type-submit:disabled { opacity:0.5; cursor:default; }
 
   /* RESULT */
-  .result-screen { text-align:center; padding:36px 20px; background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); }
-  .result-screen .trophy { font-size:4.5rem; margin-bottom:14px; }
-  .result-screen h2 { font-family:'Baloo 2',cursive; font-size:1.9rem; margin-bottom:6px; }
-  .result-screen .score-big { font-size:2.8rem; font-weight:900; color:var(--primary-dark); }
-  .result-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px; }
+  .result-screen { text-align:center; padding:32px 20px; background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); }
+  .result-screen .trophy { font-size:4rem; margin-bottom:12px; }
+  .result-screen h2 { font-family:'Baloo 2',cursive; font-size:1.8rem; margin-bottom:6px; }
+  .result-screen .score-big { font-size:2.6rem; font-weight:900; color:var(--primary-dark); }
+  .result-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px; }
 
   /* EMPTY */
-  .empty-state { text-align:center; padding:60px 20px; color:var(--text-light); }
-  .empty-state .big-emoji { font-size:4rem; margin-bottom:14px; }
-  .empty-state h3 { font-family:'Baloo 2',cursive; font-size:1.5rem; color:var(--text); margin-bottom:8px; }
+  .empty-state { text-align:center; padding:50px 20px; color:var(--text-light); }
+  .empty-state .big-emoji { font-size:3.5rem; margin-bottom:12px; }
+  .empty-state h3 { font-family:'Baloo 2',cursive; font-size:1.4rem; color:var(--text); margin-bottom:8px; }
 
-  .section-label { font-size:0.78rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); margin-bottom:10px; }
-  .mistakes-badge { display:inline-flex; align-items:center; background:var(--danger); color:white; border-radius:50px; padding:2px 8px; font-size:0.75rem; font-weight:800; margin-left:6px; }
+  .section-label { font-size:0.76rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); margin-bottom:10px; }
+  .mistakes-badge { display:inline-flex; align-items:center; background:var(--danger); color:white; border-radius:50px; padding:2px 8px; font-size:0.72rem; font-weight:800; margin-left:6px; }
 
-  /* ====== PARENT DASHBOARD ====== */
+  /* PARENT DASHBOARD */
   #parent-overlay { display:none; position:fixed; inset:0; z-index:200; background:rgba(10,10,30,0.7); backdrop-filter:blur(4px); align-items:center; justify-content:center; }
   #parent-overlay.show { display:flex; }
   .parent-panel { background:var(--bg); border-radius:28px; width:min(820px,96vw); max-height:90vh; overflow-y:auto; box-shadow:0 24px 80px rgba(0,0,0,0.35); position:relative; }
-  .parent-header { background:linear-gradient(135deg,var(--primary-dark),#7b5ea7); padding:28px 32px 20px; border-radius:28px 28px 0 0; color:white; }
-  .parent-header h2 { font-family:'Baloo 2',cursive; font-size:1.8rem; font-weight:800; }
-  .parent-header p { opacity:0.85; font-size:0.9rem; margin-top:4px; }
-  .parent-close { position:absolute; top:20px; right:24px; background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:38px; height:38px; color:white; font-size:1.3rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+  .parent-header { background:linear-gradient(135deg,var(--primary-dark),#7b5ea7); padding:26px 30px 18px; border-radius:28px 28px 0 0; color:white; }
+  .parent-header h2 { font-family:'Baloo 2',cursive; font-size:1.7rem; font-weight:800; }
+  .parent-header p { opacity:0.85; font-size:0.88rem; margin-top:4px; }
+  .parent-close { position:absolute; top:18px; right:22px; background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:36px; height:36px; color:white; font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
   .parent-close:hover { background:rgba(255,255,255,0.35); }
-  .parent-body { padding:28px 32px; }
-
-  /* PIN screen */
-  .pin-screen { text-align:center; padding:20px 0; }
-  .pin-screen h3 { font-family:'Baloo 2',cursive; font-size:1.4rem; margin-bottom:8px; }
-  .pin-screen p { color:var(--text-light); font-size:0.9rem; margin-bottom:24px; }
-  .pin-dots { display:flex; gap:12px; justify-content:center; margin-bottom:24px; }
-  .pin-dot { width:18px; height:18px; border-radius:50%; border:3px solid #ccc; transition:all 0.2s; }
+  .parent-body { padding:24px 28px; }
+  .pin-screen { text-align:center; padding:16px 0; }
+  .pin-screen h3 { font-family:'Baloo 2',cursive; font-size:1.3rem; margin-bottom:7px; }
+  .pin-screen p { color:var(--text-light); font-size:0.88rem; margin-bottom:20px; }
+  .pin-dots { display:flex; gap:12px; justify-content:center; margin-bottom:22px; }
+  .pin-dot { width:17px; height:17px; border-radius:50%; border:3px solid #ccc; transition:all 0.2s; }
   .pin-dot.filled { background:var(--primary); border-color:var(--primary); }
-  .pin-pad { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-width:240px; margin:0 auto; }
-  .pin-key { background:var(--surface); border:2px solid #e0e0e0; border-radius:14px; padding:16px; font-family:'Baloo 2',cursive; font-size:1.4rem; font-weight:700; cursor:pointer; transition:all 0.15s; box-shadow:var(--shadow); color:var(--text); }
+  .pin-pad { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; max-width:220px; margin:0 auto; }
+  .pin-key { background:var(--surface); border:2px solid #e0e0e0; border-radius:13px; padding:14px; font-family:'Baloo 2',cursive; font-size:1.3rem; font-weight:700; cursor:pointer; transition:all 0.15s; box-shadow:var(--shadow); color:var(--text); }
   .pin-key:hover { background:var(--primary); color:white; border-color:var(--primary); transform:scale(1.05); }
-  .pin-key.del { font-size:1rem; font-family:'Nunito',sans-serif; }
-  .pin-error { color:var(--danger); font-weight:700; font-size:0.9rem; margin-top:10px; animation:shake 0.4s; }
-  .pin-note { color:var(--text-light); font-size:0.78rem; margin-top:16px; }
-
-  /* Dashboard cards */
-  .dash-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:14px; margin-bottom:24px; }
-  .dash-card { background:var(--surface); border-radius:18px; padding:20px 16px; text-align:center; box-shadow:var(--shadow); }
-  .dash-card .dc-val { font-family:'Baloo 2',cursive; font-size:2.2rem; font-weight:800; }
-  .dash-card .dc-label { font-size:0.78rem; font-weight:700; color:var(--text-light); margin-top:4px; text-transform:uppercase; letter-spacing:1px; }
-  .dash-card.green .dc-val { color:var(--success); }
-  .dash-card.red .dc-val { color:var(--danger); }
-  .dash-card.blue .dc-val { color:#5c6bc0; }
-  .dash-card.orange .dc-val { color:#f57c00; }
-
-  /* Sessions */
-  .dash-section-title { font-family:'Baloo 2',cursive; font-size:1.1rem; font-weight:800; margin-bottom:12px; color:var(--text); display:flex; align-items:center; gap:8px; }
-  .sessions-list { display:flex; flex-direction:column; gap:8px; margin-bottom:24px; }
-  .session-row { background:var(--surface); border-radius:14px; padding:14px 18px; box-shadow:0 2px 8px rgba(0,0,0,0.07); display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
-  .session-mode-badge { border-radius:50px; padding:4px 12px; font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; flex-shrink:0; }
-  .badge-flashcard { background:#ffe0f0; color:var(--primary-dark); }
-  .badge-quiz { background:#e8e4ff; color:#5c35c9; }
-  .badge-type { background:#fff3cd; color:#a66000; }
-  .badge-match { background:#d0f4ff; color:#0077a8; }
-  .badge-mistakes { background:#ffe0e6; color:var(--danger); }
+  .pin-error { color:var(--danger); font-weight:700; font-size:0.88rem; margin-top:10px; animation:shake 0.4s; }
+  .pin-note { color:var(--text-light); font-size:0.76rem; margin-top:14px; }
+  .dash-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:22px; }
+  .dash-card { background:var(--surface); border-radius:17px; padding:18px 14px; text-align:center; box-shadow:var(--shadow); }
+  .dash-card .dc-val { font-family:'Baloo 2',cursive; font-size:2rem; font-weight:800; }
+  .dash-card .dc-label { font-size:0.75rem; font-weight:700; color:var(--text-light); margin-top:4px; text-transform:uppercase; letter-spacing:1px; }
+  .dash-card.green .dc-val{color:var(--success);} .dash-card.red .dc-val{color:var(--danger);} .dash-card.blue .dc-val{color:#5c6bc0;} .dash-card.orange .dc-val{color:#f57c00;}
+  .dash-section-title { font-family:'Baloo 2',cursive; font-size:1.05rem; font-weight:800; margin-bottom:10px; color:var(--text); }
+  .sessions-list { display:flex; flex-direction:column; gap:8px; margin-bottom:22px; }
+  .session-row { background:var(--surface); border-radius:13px; padding:12px 16px; box-shadow:0 2px 8px rgba(0,0,0,0.07); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .session-mode-badge { border-radius:50px; padding:3px 11px; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; flex-shrink:0; }
+  .badge-flashcard{background:#ffe0f0;color:var(--primary-dark);} .badge-quiz{background:#e8e4ff;color:#5c35c9;} .badge-type{background:#fff3cd;color:#a66000;} .badge-match{background:#d0f4ff;color:#0077a8;} .badge-mistakes{background:#ffe0e6;color:var(--danger);}
   .session-info { flex:1; }
-  .session-info .si-time { font-size:0.78rem; color:var(--text-light); font-weight:600; }
-  .session-info .si-score { font-weight:800; font-size:0.95rem; }
-  .session-score-bar { flex:0 0 80px; height:8px; background:#e8e8e8; border-radius:50px; overflow:hidden; }
+  .session-info .si-time { font-size:0.76rem; color:var(--text-light); font-weight:600; }
+  .session-info .si-score { font-weight:800; font-size:0.92rem; }
+  .session-score-bar { flex:0 0 70px; height:7px; background:#e8e8e8; border-radius:50px; overflow:hidden; }
   .session-score-fill { height:100%; border-radius:50px; background:linear-gradient(90deg,var(--success),#a8edcc); }
-
-  /* Word table */
-  .word-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
-  .word-table th { background:#f0f0f8; padding:10px 14px; text-align:left; font-weight:800; color:var(--text-light); font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; }
-  .word-table td { padding:10px 14px; border-bottom:1px solid #f0f0f0; vertical-align:middle; }
-  .word-table tr:hover td { background:#fafafa; }
-  .wt-word { font-family:'Baloo 2',cursive; font-weight:700; font-size:0.95rem; }
-  .wt-bar-wrap { width:80px; height:8px; background:#e8e8e8; border-radius:50px; overflow:hidden; display:inline-block; }
+  .word-table { width:100%; border-collapse:collapse; font-size:0.83rem; }
+  .word-table th { background:#f0f0f8; padding:9px 12px; text-align:left; font-weight:800; color:var(--text-light); font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; }
+  .word-table td { padding:9px 12px; border-bottom:1px solid #f0f0f0; vertical-align:middle; }
+  .wt-word { font-family:'Baloo 2',cursive; font-weight:700; font-size:0.92rem; }
+  .wt-bar-wrap { width:70px; height:7px; background:#e8e8e8; border-radius:50px; overflow:hidden; display:inline-block; }
   .wt-bar { height:100%; border-radius:50px; }
-  .wt-status { font-size:0.75rem; font-weight:800; padding:3px 10px; border-radius:50px; }
-  .status-ok { background:#d0f8ef; color:#00512e; }
-  .status-hard { background:#ffe0e6; color:#8b0022; }
-  .status-new { background:#f0f0f0; color:#888; }
-
-  /* Tabs */
-  .dash-tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
-  .dash-tab { background:var(--surface); border:2px solid #e0e0e0; border-radius:50px; padding:7px 18px; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.82rem; cursor:pointer; color:var(--text-light); transition:all 0.2s; }
+  .wt-status { font-size:0.72rem; font-weight:800; padding:3px 9px; border-radius:50px; }
+  .status-ok{background:#d0f8ef;color:#00512e;} .status-hard{background:#ffe0e6;color:#8b0022;} .status-new{background:#f0f0f0;color:#888;}
+  .dash-tabs { display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+  .dash-tab { background:var(--surface); border:2px solid #e0e0e0; border-radius:50px; padding:6px 16px; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.8rem; cursor:pointer; color:var(--text-light); transition:all 0.2s; }
   .dash-tab.active { background:var(--primary); border-color:var(--primary); color:white; }
   .dash-tab:hover:not(.active) { border-color:var(--primary); color:var(--primary-dark); }
-
-  .dash-reset { background:#fff0f0; border:2px solid #ffc5c5; border-radius:50px; padding:7px 16px; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.8rem; cursor:pointer; color:var(--danger); transition:all 0.2s; margin-left:auto; }
+  .dash-reset { background:#fff0f0; border:2px solid #ffc5c5; border-radius:50px; padding:6px 14px; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.78rem; cursor:pointer; color:var(--danger); transition:all 0.2s; margin-left:auto; }
   .dash-reset:hover { background:var(--danger); color:white; }
 
   @media(max-width:600px){
-    header h1{font-size:2rem;} .parent-body{padding:20px 16px;} .quiz-options{grid-template-columns:1fr;} .matching-grid{grid-template-columns:1fr 1fr;} .match-item{font-size:0.73rem;padding:9px;} .card-word{font-size:1.5rem;} .mode-selector{grid-template-columns:1fr 1fr;} .pin-pad{max-width:200px;} .parent-btn{font-size:0.72rem;padding:6px 10px;}
+    header h1{font-size:2rem;} .parent-body{padding:18px 14px;} .quiz-options{grid-template-columns:1fr;} .card-word{font-size:1.4rem;} .mode-selector{grid-template-columns:1fr 1fr;} .theme-cards{grid-template-columns:1fr 1fr;} .parent-btn{font-size:0.7rem;padding:6px 10px;}
   }
 </style>
 </head>
@@ -221,169 +220,208 @@
 <div id="app">
   <header>
     <h1>📚 Woordjes Leren</h1>
-    <p>Theater & Film — Groep 6</p>
-    <button class="parent-btn" onclick="openParent()">👨‍👩‍👧 Ouder dashboard</button>
+    <p id="header-sub">Kies een woordjesset om te oefenen</p>
+    <button class="parent-btn" onclick="openParent()">👨‍👩‍👧 Ouder</button>
   </header>
-
-  <div class="stats-bar">
-    <div class="stat-chip"><span class="dot dot-total"></span><span id="stat-total">0</span> woordjes</div>
-    <div class="stat-chip"><span class="dot dot-learned"></span><span id="stat-learned">0</span> geleerd</div>
-    <div class="stat-chip"><span class="dot dot-mistakes"></span><span id="stat-mistakes">0</span> fout</div>
-  </div>
-
-  <div class="mode-selector">
-    <button class="mode-btn active" onclick="switchMode('flashcard')" id="btn-flashcard">
-      <span class="mode-icon">🃏</span><span class="mode-name">Flashcards</span><span class="mode-desc">Omdraaien & onthouden</span>
-    </button>
-    <button class="mode-btn" onclick="switchMode('quiz')" id="btn-quiz">
-      <span class="mode-icon">🧠</span><span class="mode-name">Quiz</span><span class="mode-desc">Kies het juiste woord</span>
-    </button>
-    <button class="mode-btn" onclick="switchMode('type')" id="btn-type">
-      <span class="mode-icon">✍️</span><span class="mode-name">Typ het woord</span><span class="mode-desc">Schrijf het antwoord</span>
-    </button>
-    <button class="mode-btn" onclick="switchMode('match')" id="btn-match">
-      <span class="mode-icon">🧩</span><span class="mode-name">Koppelen</span><span class="mode-desc">Woord aan definitie</span>
-    </button>
-    <button class="mode-btn" onclick="switchMode('mistakes')" id="btn-mistakes">
-      <span class="mode-icon">🔁</span>
-      <span class="mode-name">Foute woorden <span class="mistakes-badge" id="mistakes-count-badge">0</span></span>
-      <span class="mode-desc">Oefen je fouten opnieuw</span>
-    </button>
-  </div>
-
-  <div class="filter-bar" id="filter-bar">
-    <label>Oefenen:</label>
-    <button class="filter-toggle active" onclick="setFilter('all',this)">Alle woordjes</button>
-    <button class="filter-toggle" onclick="setFilter('mistakes',this)">Alleen foute</button>
-  </div>
-
-  <div class="game-area" id="game-area"></div>
+  <div id="main-content"></div>
 </div>
 
-<!-- PARENT OVERLAY -->
 <div id="parent-overlay">
   <div class="parent-panel">
     <div class="parent-header">
       <h2>👨‍👩‍👧 Ouder Dashboard</h2>
-      <p>Voortgang van je dochter bij het leren van woordjes</p>
+      <p>Voortgang van je dochter</p>
       <button class="parent-close" onclick="closeParent()">✕</button>
     </div>
     <div class="parent-body" id="parent-body"></div>
   </div>
 </div>
 
+<script src="woordjes.js"></script>
 <script>
-const WORDS = [
-  ["aanraden","Iemand de raad geven iets wel te doen."],
-  ["afraden","Iemand de raad geven iets niet te doen."],
-  ["het geluidseffect","Een bijzonder geluid dat te horen is in een voorstelling."],
-  ["de kritiek","Zeggen wat er niet goed is aan wat iemand doet."],
-  ["lovend","Aanprijzend, met complimenten."],
-  ["negatief","Gezegd van iemand die afkeurende kritiek heeft."],
-  ["noteren","Opschrijven, aantekenen."],
-  ["de pers","De journalisten en de krant, radio of de televisie waar ze voor schrijven."],
-  ["het personage","Een persoon die in een boek, toneelstuk of film voorkomt."],
-  ["het plot","Het verloop van een verhaal van het begin tot het einde."],
-  ["positief","Gezegd van iemand die opbouwende kritiek heeft."],
-  ["de recensie","Een mening over een boek, toneelstuk of film. Meestal geschreven in een krant of tijdschrift."],
-  ["de recensent","Iemand die voor een krant of tijdschrift schrijft wat hij van een voorstelling, boek of film vindt."],
-  ["de repetitie","De keer dat je een muziekstuk of voorstelling oefent."],
-  ["de roem","Grote bekendheid, bewonderd worden door heel veel mensen."],
-  ["het scenario","Een beschrijving van de delen van een film of een toneelstuk."],
-  ["de scène","Een deel van een film of een toneelstuk."],
-  ["het theatergezelschap","Een groep mensen die samen een toneelstuk speelt."],
-  ["voorspelbaar","Als je weet wat er gaat komen, is iets voorspelbaar."],
-  ["de waardering","Hoe belangrijk en waardevol je iets vindt."],
-  ["de acteur","Iemand die een rol heeft in een film of in een toneelstuk."],
-  ["de auditie","Een proefoptreden. Je zingt, speelt of danst om te laten zien wat je kunt."],
-  ["de auteur","De schrijver."],
-  ["de componist","Iemand die muziekstukken bedenkt en ze opschrijft met muzieknoten."],
-  ["het decor","Alle voorwerpen die op het podium staan tijdens een toneelstuk."],
-  ["dolgelukkig","Heel gelukkig."],
-  ["de geluidsman","Iemand die bij een voorstelling zorgt dat alle geluiden en stemmen goed te horen zijn."],
-  ["de hoofdrol","De belangrijkste rol bij een film of een toneelstuk."],
-  ["kleurrijk","Met veel verschillende kleuren."],
-  ["langdradig","Saai."],
-  ["ontroerend","Als iets je een mooi en verdrietig gevoel geeft. Het raakt je gevoel."],
-  ["de ontwerper","Iemand die bedenkt en tekent hoe iets eruit moet gaan zien."],
-  ["de ovatie","Een groot applaus."],
-  ["de plankenkoorts","Een zenuwachtige angst voor een optreden."],
-  ["het podium","Verhoging waarop een optreden plaatsvindt."],
-  ["de première","De eerste voorstelling."],
-  ["de regisseur","Iemand die de leiding heeft over de uitvoering van een toneelstuk of een film."],
-  ["het rekwisiet","Een voorwerp dat gebruikt wordt in een voorstelling."],
-  ["repeteren","Oefenen voor een voorstelling of toneelstuk."],
-  ["de theatervoorstelling","Een voorstelling in een theater. Bijvoorbeeld een toneelstuk."],
-];
-
-const PIN = "1234"; // ← verander dit naar jouw pincode
+const PIN = "1397";
 
 // State
-let mistakes = new Set(JSON.parse(localStorage.getItem('wl_mistakes')||'[]'));
-let learned  = new Set(JSON.parse(localStorage.getItem('wl_learned')||'[]'));
+let activeThemeIds = []; // welke thema's zijn geselecteerd
+let activeWords = [];    // gecombineerde woordenlijst
+let activeThemeLabel = '';
+
+let mistakes  = new Set(JSON.parse(localStorage.getItem('wl_mistakes')||'[]'));
+let learned   = new Set(JSON.parse(localStorage.getItem('wl_learned')||'[]'));
 let wordStats = JSON.parse(localStorage.getItem('wl_wordstats')||'{}');
-  // wordStats[word] = { correct: N, wrong: N }
 let sessions  = JSON.parse(localStorage.getItem('wl_sessions')||'[]');
-  // sessions: [{ts, mode, score, total, duration}]
 
 let currentMode='flashcard', filterMode='all';
 let currentDeck=[], currentIdx=0, quizScore=0, quizTotal=0;
 let matchSelected=null, matchPairs=[], matchDone=0;
 let typeDeck=[], typeIdx=0, typeScore=0;
 let sessionStart=Date.now();
+let pinBuffer='', dashTab='overview';
 
-function getActiveDeck(){
-  return filterMode==='mistakes' ? WORDS.filter(w=>mistakes.has(w[0])) : WORDS;
+// ===== THEME PICKER =====
+function showThemePicker() {
+  activeThemeIds = [];
+  activeWords = [];
+  activeThemeLabel = '';
+  document.getElementById('header-sub').textContent = 'Kies een woordjesset om te oefenen';
+
+  // Groepeer per jaar
+  const byYear = {};
+  WOORDENLIJSTEN.forEach(t => {
+    if(!byYear[t.jaar]) byYear[t.jaar] = [];
+    byYear[t.jaar].push(t);
+  });
+
+  let html = '<div id="theme-screen">';
+  html += '<div class="theme-screen-title">Welke woordjes wil je oefenen?</div>';
+  html += '<div class="theme-screen-sub">Kies een thema of oefen alle woorden van een schooljaar.</div>';
+
+  Object.entries(byYear).sort((a,b)=>b[0].localeCompare(a[0])).forEach(([jaar, themas]) => {
+    html += `<div class="year-group">`;
+    html += `<div class="year-label">📅 Schooljaar ${jaar}</div>`;
+    html += `<div class="theme-cards">`;
+
+    // "Alle woorden" kaart voor dit jaar
+    const allIds = themas.map(t=>t.id);
+    const allCount = themas.reduce((s,t)=>s+t.woorden.length,0);
+    html += `<button class="theme-card all-words-card" onclick="selectTheme(${JSON.stringify(allIds)},'Alle woorden ${jaar}')">
+      <span class="tc-emoji">⭐</span>
+      <div class="tc-title">Alle woorden</div>
+      <div class="tc-meta">${themas.length} thema's samen</div>
+      <span class="tc-count">${allCount} woordjes</span>
+    </button>`;
+
+    // Losse thema's
+    themas.forEach(t => {
+      const learned_n = t.woorden.filter(w=>learned.has(w[0])).length;
+      const pct = Math.round(learned_n/t.woorden.length*100);
+      html += `<button class="theme-card" onclick="selectTheme(['${t.id}'],'${t.titel}')" style="border-top-color:${t.kleur}">
+        <span class="tc-emoji">${t.emoji}</span>
+        <div class="tc-title">${t.titel}</div>
+        <div class="tc-meta">${t.groep}</div>
+        <span class="tc-count">${t.woorden.length} woordjes · ${pct}% geleerd</span>
+      </button>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  html += '</div>';
+  document.getElementById('main-content').innerHTML = html;
 }
 
-function recordWordResult(word, correct){
+function selectTheme(ids, label) {
+  activeThemeIds = ids;
+  activeThemeLabel = label;
+
+  // Combineer woorden, verwijder duplicaten op woord
+  const seen = new Set();
+  activeWords = [];
+  ids.forEach(id => {
+    const thema = WOORDENLIJSTEN.find(t=>t.id===id);
+    if(thema) thema.woorden.forEach(w => {
+      if(!seen.has(w[0])) { seen.add(w[0]); activeWords.push(w); }
+    });
+  });
+
+  document.getElementById('header-sub').textContent = label;
+  sessionStart = Date.now();
+  renderLearningUI();
+}
+
+function renderLearningUI() {
+  const learnedInSet = activeWords.filter(w=>learned.has(w[0])).length;
+  const mistakesInSet = activeWords.filter(w=>mistakes.has(w[0])).length;
+
+  const html = `
+    <div class="back-bar">
+      <button class="back-btn" onclick="showThemePicker()">← Terug</button>
+      <span class="active-theme-badge">Je oefent: <strong>${activeThemeLabel}</strong></span>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-chip"><span class="dot dot-total"></span><span id="stat-total">${activeWords.length}</span> woordjes</div>
+      <div class="stat-chip"><span class="dot dot-learned"></span><span id="stat-learned">${learnedInSet}</span> geleerd</div>
+      <div class="stat-chip"><span class="dot dot-mistakes"></span><span id="stat-mistakes">${mistakesInSet}</span> fout</div>
+    </div>
+    <div class="mode-selector">
+      <button class="mode-btn active" onclick="switchMode('flashcard')" id="btn-flashcard"><span class="mode-icon">🃏</span><span class="mode-name">Flashcards</span><span class="mode-desc">Omdraaien & onthouden</span></button>
+      <button class="mode-btn" onclick="switchMode('quiz')" id="btn-quiz"><span class="mode-icon">🧠</span><span class="mode-name">Quiz</span><span class="mode-desc">Kies het juiste woord</span></button>
+      <button class="mode-btn" onclick="switchMode('type')" id="btn-type"><span class="mode-icon">✍️</span><span class="mode-name">Typ het woord</span><span class="mode-desc">Schrijf het antwoord</span></button>
+      <button class="mode-btn" onclick="switchMode('match')" id="btn-match"><span class="mode-icon">🧩</span><span class="mode-name">Koppelen</span><span class="mode-desc">Woord aan definitie</span></button>
+      <button class="mode-btn" onclick="switchMode('mistakes')" id="btn-mistakes"><span class="mode-icon">🔁</span><span class="mode-name">Foute woorden <span class="mistakes-badge" id="mistakes-count-badge">${mistakesInSet}</span></span><span class="mode-desc">Oefen je fouten opnieuw</span></button>
+    </div>
+    <div class="filter-bar">
+      <label>Oefenen:</label>
+      <button class="filter-toggle active" onclick="setFilter('all',this)">Alle woordjes</button>
+      <button class="filter-toggle" onclick="setFilter('mistakes',this)">Alleen foute</button>
+    </div>
+    <div class="game-area" id="game-area"></div>`;
+
+  document.getElementById('main-content').innerHTML = html;
+  currentMode = 'flashcard';
+  filterMode = 'all';
+  initCurrentMode();
+}
+
+// ===== CORE =====
+function getActiveDeck() {
+  const deck = filterMode==='mistakes' ? activeWords.filter(w=>mistakes.has(w[0])) : activeWords;
+  return deck;
+}
+
+function updateStats() {
+  const learnedInSet = activeWords.filter(w=>learned.has(w[0])).length;
+  const mistakesInSet = activeWords.filter(w=>mistakes.has(w[0])).length;
+  const el = id => document.getElementById(id);
+  if(el('stat-total')) el('stat-total').textContent = activeWords.length;
+  if(el('stat-learned')) el('stat-learned').textContent = learnedInSet;
+  if(el('stat-mistakes')) el('stat-mistakes').textContent = mistakesInSet;
+  if(el('mistakes-count-badge')) el('mistakes-count-badge').textContent = mistakesInSet;
+}
+
+function recordWordResult(word,correct) {
   if(!wordStats[word]) wordStats[word]={correct:0,wrong:0};
   if(correct) wordStats[word].correct++; else wordStats[word].wrong++;
-  localStorage.setItem('wl_wordstats', JSON.stringify(wordStats));
+  localStorage.setItem('wl_wordstats',JSON.stringify(wordStats));
 }
 
-function recordSession(mode, score, total){
-  const s = { ts: Date.now(), mode, score, total, duration: Math.round((Date.now()-sessionStart)/1000) };
+function recordSession(mode,score,total) {
+  const s={ts:Date.now(),mode,score,total,duration:Math.round((Date.now()-sessionStart)/1000),thema:activeThemeLabel};
   sessions.unshift(s);
-  if(sessions.length>50) sessions=sessions.slice(0,50);
-  localStorage.setItem('wl_sessions', JSON.stringify(sessions));
+  if(sessions.length>100) sessions=sessions.slice(0,100);
+  localStorage.setItem('wl_sessions',JSON.stringify(sessions));
   sessionStart=Date.now();
 }
 
-function saveState(){
-  localStorage.setItem('wl_mistakes', JSON.stringify([...mistakes]));
-  localStorage.setItem('wl_learned',  JSON.stringify([...learned]));
+function saveState() {
+  localStorage.setItem('wl_mistakes',JSON.stringify([...mistakes]));
+  localStorage.setItem('wl_learned',JSON.stringify([...learned]));
   updateStats();
 }
 
-function updateStats(){
-  document.getElementById('stat-total').textContent=WORDS.length;
-  document.getElementById('stat-learned').textContent=learned.size;
-  document.getElementById('stat-mistakes').textContent=mistakes.size;
-  document.getElementById('mistakes-count-badge').textContent=mistakes.size;
-}
-
-function setFilter(f,el){
+function setFilter(f,el) {
   filterMode=f;
   document.querySelectorAll('.filter-toggle').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   initCurrentMode();
 }
 
-function switchMode(mode){
+function switchMode(mode) {
   currentMode=mode;
   document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('btn-'+mode).classList.add('active');
+  const btn=document.getElementById('btn-'+mode);
+  if(btn) btn.classList.add('active');
   sessionStart=Date.now();
   initCurrentMode();
 }
 
-function initCurrentMode(){
+function initCurrentMode() {
   const area=document.getElementById('game-area');
+  if(!area) return;
   area.innerHTML='';
   const deck=getActiveDeck();
   if(deck.length===0&&filterMode==='mistakes'){
-    area.innerHTML=`<div class="empty-state"><div class="big-emoji">🎉</div><h3>Geen fouten meer!</h3><p>Je hebt alle fout gegane woordjes geleerd!</p><button class="action-btn btn-primary" style="margin-top:16px" onclick="setFilter('all',document.querySelector('.filter-toggle'))">Alle woordjes oefenen</button></div>`;
+    area.innerHTML=`<div class="empty-state"><div class="big-emoji">🎉</div><h3>Geen fouten meer!</h3><p>Je hebt alle fout gegane woordjes geleerd!</p><button class="action-btn btn-primary" style="margin-top:14px" onclick="setFilter('all',document.querySelector('.filter-toggle'))">Alle woordjes oefenen</button></div>`;
     return;
   }
   if(currentMode==='flashcard') initFlashcard(deck);
@@ -393,27 +431,16 @@ function initCurrentMode(){
 }
 
 // ===== FLASHCARD =====
-function initFlashcard(deck){
-  currentDeck=shuffle([...deck]); currentIdx=0; renderFlashcard();
-}
+function initFlashcard(deck){currentDeck=shuffle([...deck]);currentIdx=0;renderFlashcard();}
 function renderFlashcard(){
-  const area=document.getElementById('game-area');
-  const total=currentDeck.length;
-  const [word,def]=currentDeck[currentIdx];
+  const area=document.getElementById('game-area'),total=currentDeck.length,[word,def]=currentDeck[currentIdx];
   const pct=(currentIdx/total*100).toFixed(0);
   area.innerHTML=`
     <div class="progress-wrap"><div class="progress-fill" style="width:${pct}%"></div></div>
-    <div class="flashcard-wrap" onclick="flipCard()" id="fc-wrap">
+    <div class="flashcard-wrap" onclick="flipCard()">
       <div class="flashcard" id="flashcard">
-        <div class="card-face card-front">
-          <div class="card-label">Woord</div>
-          <div class="card-word">${word}</div>
-          <div class="card-hint">👆 Klik om de definitie te zien</div>
-        </div>
-        <div class="card-face card-back">
-          <div class="card-label">Definitie</div>
-          <div class="card-def">${def}</div>
-        </div>
+        <div class="card-face card-front"><div class="card-label">Woord</div><div class="card-word">${word}</div><div class="card-hint">👆 Klik om de definitie te zien</div></div>
+        <div class="card-face card-back"><div class="card-label">Definitie</div><div class="card-def">${def}</div></div>
       </div>
     </div>
     <div class="flashcard-nav">
@@ -426,118 +453,100 @@ function renderFlashcard(){
       <button class="action-btn btn-right" onclick="markRight('${esc(word)}')">✅ Weet ik!</button>
     </div>`;
 }
-function flipCard(){ document.getElementById('flashcard').classList.toggle('flipped'); }
-function fcNav(dir){ currentIdx=Math.max(0,Math.min(currentDeck.length-1,currentIdx+dir)); renderFlashcard(); }
-function markWrong(word){ mistakes.add(word); learned.delete(word); recordWordResult(word,false); saveState(); if(currentIdx<currentDeck.length-1){currentIdx++;renderFlashcard();}else{recordSession('flashcard',learned.size,currentDeck.length);showResult('flashcard');} }
-function markRight(word){ learned.add(word); mistakes.delete(word); recordWordResult(word,true); saveState(); if(currentIdx<currentDeck.length-1){currentIdx++;renderFlashcard();}else{recordSession('flashcard',learned.size,currentDeck.length);showResult('flashcard');} }
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');}
+function fcNav(dir){currentIdx=Math.max(0,Math.min(currentDeck.length-1,currentIdx+dir));renderFlashcard();}
+function markWrong(word){mistakes.add(word);learned.delete(word);recordWordResult(word,false);saveState();if(currentIdx<currentDeck.length-1){currentIdx++;renderFlashcard();}else{recordSession('flashcard',learned.size,currentDeck.length);showResult('flashcard');}}
+function markRight(word){learned.add(word);mistakes.delete(word);recordWordResult(word,true);saveState();if(currentIdx<currentDeck.length-1){currentIdx++;renderFlashcard();}else{recordSession('flashcard',learned.size,currentDeck.length);showResult('flashcard');}}
 
 // ===== QUIZ =====
-function initQuiz(deck){ currentDeck=shuffle([...deck]); currentIdx=0; quizScore=0; quizTotal=currentDeck.length; renderQuiz(); }
+function initQuiz(deck){currentDeck=shuffle([...deck]);currentIdx=0;quizScore=0;quizTotal=currentDeck.length;renderQuiz();}
 function renderQuiz(){
-  if(currentIdx>=currentDeck.length){ recordSession(currentMode,quizScore,quizTotal); showResult('quiz'); return; }
-  const area=document.getElementById('game-area');
-  const [word,def]=currentDeck[currentIdx];
+  if(currentIdx>=currentDeck.length){recordSession(currentMode,quizScore,quizTotal);showResult('quiz');return;}
+  const area=document.getElementById('game-area'),[word,def]=currentDeck[currentIdx];
   const pct=(currentIdx/currentDeck.length*100).toFixed(0);
   let opts=[word];
-  shuffle([...WORDS].filter(w=>w[0]!==word)).slice(0,3).forEach(w=>opts.push(w[0]));
+  shuffle([...activeWords].filter(w=>w[0]!==word)).slice(0,3).forEach(w=>opts.push(w[0]));
   shuffle(opts);
   area.innerHTML=`
     <div class="progress-wrap"><div class="progress-fill" style="width:${pct}%"></div></div>
-    <div class="quiz-question">
-      <div class="q-label">Wat is de definitie van…</div>
-      <div class="q-text" style="font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800;">${word}</div>
-    </div>
+    <div class="quiz-question"><div class="q-label">Wat is de definitie van…</div><div class="q-text" style="font-family:'Baloo 2',cursive;font-size:1.45rem;font-weight:800;">${word}</div></div>
     <div class="section-label">Kies de juiste definitie:</div>
     <div class="quiz-options">
-      ${WORDS.filter(w=>opts.includes(w[0])).sort((a,b)=>opts.indexOf(a[0])-opts.indexOf(b[0])).map(w=>`
-        <button class="option-btn" onclick="quizAnswer(this,'${esc(w[0])}','${esc(word)}')">${w[1]}</button>`).join('')}
+      ${activeWords.filter(w=>opts.includes(w[0])).sort((a,b)=>opts.indexOf(a[0])-opts.indexOf(b[0])).map(w=>`<button class="option-btn" onclick="quizAnswer(this,'${esc(w[0])}','${esc(word)}')">${w[1]}</button>`).join('')}
     </div>
-    <div style="text-align:center;color:var(--text-light);font-size:0.85rem;font-weight:600;">Vraag ${currentIdx+1} van ${currentDeck.length} · Score: ${quizScore}/${currentIdx}</div>`;
+    <div style="text-align:center;color:var(--text-light);font-size:0.83rem;font-weight:600;">Vraag ${currentIdx+1} van ${currentDeck.length} · Score: ${quizScore}/${currentIdx}</div>`;
 }
 function quizAnswer(btn,chosen,correct){
   document.querySelectorAll('.option-btn').forEach(b=>b.disabled=true);
   const ok=chosen===correct;
   btn.classList.add(ok?'correct':'wrong');
-  if(ok){ quizScore++; learned.add(correct); mistakes.delete(correct); }
-  else { mistakes.add(correct); learned.delete(correct);
-    document.querySelectorAll('.option-btn').forEach(b=>{ const m=WORDS.find(w=>w[1].trim()===b.textContent.trim()); if(m&&m[0]===correct) b.classList.add('correct'); }); }
-  recordWordResult(correct,ok); saveState();
-  setTimeout(()=>{ currentIdx++; renderQuiz(); },1200);
+  if(ok){quizScore++;learned.add(correct);mistakes.delete(correct);}
+  else{mistakes.add(correct);learned.delete(correct);
+    document.querySelectorAll('.option-btn').forEach(b=>{const m=activeWords.find(w=>w[1].trim()===b.textContent.trim());if(m&&m[0]===correct)b.classList.add('correct');});}
+  recordWordResult(correct,ok);saveState();
+  setTimeout(()=>{currentIdx++;renderQuiz();},1200);
 }
 
 // ===== TYPE =====
-function initType(deck){ typeDeck=shuffle([...deck]); typeIdx=0; typeScore=0; renderType(); }
+function initType(deck){typeDeck=shuffle([...deck]);typeIdx=0;typeScore=0;renderType();}
 function renderType(){
-  if(typeIdx>=typeDeck.length){ recordSession('type',typeScore,typeDeck.length); showResult('type'); return; }
-  const area=document.getElementById('game-area');
-  const [word,def]=typeDeck[typeIdx];
+  if(typeIdx>=typeDeck.length){recordSession('type',typeScore,typeDeck.length);showResult('type');return;}
+  const area=document.getElementById('game-area'),[word,def]=typeDeck[typeIdx];
   const pct=(typeIdx/typeDeck.length*100).toFixed(0);
   area.innerHTML=`
     <div class="progress-wrap"><div class="progress-fill" style="width:${pct}%"></div></div>
-    <div class="quiz-question">
-      <div class="q-label">Typ het woord bij deze definitie</div>
-      <div class="q-text">${def}</div>
-    </div>
+    <div class="quiz-question"><div class="q-label">Typ het woord bij deze definitie</div><div class="q-text">${def}</div></div>
     <div class="type-input-wrap">
       <input class="type-input" id="type-inp" placeholder="Typ het woord..." autocomplete="off" onkeydown="if(event.key==='Enter')checkType('${esc(word)}')">
       <button class="type-submit" onclick="checkType('${esc(word)}')">Controleer ✓</button>
     </div>
-    <div id="type-feedback" style="min-height:30px;text-align:center;font-weight:700;font-size:0.95rem;"></div>
-    <div style="text-align:center;color:var(--text-light);font-size:0.85rem;font-weight:600;margin-top:8px;">Vraag ${typeIdx+1} van ${typeDeck.length}</div>`;
+    <div id="type-feedback" style="min-height:28px;text-align:center;font-weight:700;font-size:0.93rem;"></div>
+    <div style="text-align:center;color:var(--text-light);font-size:0.83rem;font-weight:600;margin-top:8px;">Vraag ${typeIdx+1} van ${typeDeck.length}</div>`;
   document.getElementById('type-inp').focus();
 }
-function norm(s){ return s.trim().toLowerCase().replace(/^(de |het |een )/i,'').replace(/[éèê]/g,'e').replace(/[àâ]/g,'a').replace(/[ùû]/g,'u').replace(/[îï]/g,'i').replace(/[ôö]/g,'o').replace(/ç/g,'c'); }
+function norm(s){return s.trim().toLowerCase().replace(/^(de |het |een )/i,'').replace(/[éèê]/g,'e').replace(/[àâ]/g,'a').replace(/[ùû]/g,'u').replace(/[îï]/g,'i').replace(/[ôö]/g,'o').replace(/ç/g,'c');}
 function checkType(correct){
-  const inp=document.getElementById('type-inp'), val=inp.value;
-  if(!val.trim()) return;
+  const inp=document.getElementById('type-inp'),val=inp.value;
+  if(!val.trim())return;
   const ok=norm(val)===norm(correct)||val.trim().toLowerCase()===correct.toLowerCase();
-  inp.disabled=true; document.querySelector('.type-submit').disabled=true;
+  inp.disabled=true;document.querySelector('.type-submit').disabled=true;
   inp.classList.add(ok?'correct-input':'wrong-input');
-  document.getElementById('type-feedback').innerHTML=ok
-    ?`<span style="color:var(--success)">✅ Goed zo!</span>`
-    :`<span style="color:var(--danger)">❌ Het juiste antwoord is: <strong>${correct}</strong></span>`;
-  if(ok){ typeScore++; learned.add(correct); mistakes.delete(correct); } else { mistakes.add(correct); learned.delete(correct); }
-  recordWordResult(correct,ok); saveState();
-  setTimeout(()=>{ typeIdx++; renderType(); },1600);
+  document.getElementById('type-feedback').innerHTML=ok?`<span style="color:var(--success)">✅ Goed zo!</span>`:`<span style="color:var(--danger)">❌ Het juiste antwoord is: <strong>${correct}</strong></span>`;
+  if(ok){typeScore++;learned.add(correct);mistakes.delete(correct);}else{mistakes.add(correct);learned.delete(correct);}
+  recordWordResult(correct,ok);saveState();
+  setTimeout(()=>{typeIdx++;renderType();},1600);
 }
 
 // ===== MATCH =====
-function initMatch(deck){
-  matchPairs=shuffle([...deck]).slice(0,Math.min(6,deck.length));
-  matchDone=0; matchSelected=null; renderMatch();
-}
+function initMatch(deck){matchPairs=shuffle([...deck]).slice(0,Math.min(6,deck.length));matchDone=0;matchSelected=null;renderMatch();}
 function renderMatch(){
   const area=document.getElementById('game-area');
   const words=shuffle(matchPairs.map((p,i)=>({word:p[0],idx:i,type:'word'})));
-  const defs =shuffle(matchPairs.map((p,i)=>({def:p[1],idx:i,type:'def'})));
+  const defs=shuffle(matchPairs.map((p,i)=>({def:p[1],idx:i,type:'def'})));
   area.innerHTML=`
-    <p style="text-align:center;color:var(--text-light);font-weight:700;margin-bottom:14px;">Koppel elk woord aan de juiste definitie!</p>
+    <p style="text-align:center;color:var(--text-light);font-weight:700;margin-bottom:12px;">Koppel elk woord aan de juiste definitie!</p>
     <div class="matching-grid">
       <div class="match-col">${words.map(w=>`<button class="match-item word-item" id="mw-${w.idx}" data-idx="${w.idx}" data-type="word" onclick="matchClick(this)">${w.word}</button>`).join('')}</div>
       <div class="match-col">${defs.map(d=>`<button class="match-item def-item" id="md-${d.idx}" data-idx="${d.idx}" data-type="def" onclick="matchClick(this)">${d.def}</button>`).join('')}</div>
     </div>
-    <div id="match-status" style="text-align:center;font-weight:700;color:var(--text-light);font-size:0.9rem;margin-top:8px;">${matchDone}/${matchPairs.length} gekoppeld</div>`;
+    <div id="match-status" style="text-align:center;font-weight:700;color:var(--text-light);font-size:0.88rem;margin-top:8px;">${matchDone}/${matchPairs.length} gekoppeld</div>`;
 }
 function matchClick(el){
-  if(el.classList.contains('matched')) return;
-  if(!matchSelected){ matchSelected=el; el.classList.add('selected'); return; }
-  if(matchSelected.dataset.type===el.dataset.type){ matchSelected.classList.remove('selected'); matchSelected=el; el.classList.add('selected'); return; }
-  const a=parseInt(matchSelected.dataset.idx), b=parseInt(el.dataset.idx);
+  if(el.classList.contains('matched'))return;
+  if(!matchSelected){matchSelected=el;el.classList.add('selected');return;}
+  if(matchSelected.dataset.type===el.dataset.type){matchSelected.classList.remove('selected');matchSelected=el;el.classList.add('selected');return;}
+  const a=parseInt(matchSelected.dataset.idx),b=parseInt(el.dataset.idx);
   matchSelected.classList.remove('selected');
   if(a===b){
-    matchSelected.classList.add('matched'); el.classList.add('matched');
-    matchSelected.disabled=true; el.disabled=true; matchDone++;
-    learned.add(matchPairs[a][0]); mistakes.delete(matchPairs[a][0]);
-    recordWordResult(matchPairs[a][0],true); saveState();
+    matchSelected.classList.add('matched');el.classList.add('matched');matchSelected.disabled=true;el.disabled=true;matchDone++;
+    learned.add(matchPairs[a][0]);mistakes.delete(matchPairs[a][0]);recordWordResult(matchPairs[a][0],true);saveState();
     document.getElementById('match-status').textContent=`${matchDone}/${matchPairs.length} gekoppeld`;
     matchSelected=null;
-    if(matchDone===matchPairs.length) setTimeout(()=>{ recordSession('match',matchPairs.length,matchPairs.length); showResult('match'); },600);
+    if(matchDone===matchPairs.length)setTimeout(()=>{recordSession('match',matchPairs.length,matchPairs.length);showResult('match');},600);
   } else {
-    matchSelected.classList.add('wrong-match'); el.classList.add('wrong-match');
-    mistakes.add(matchPairs[b][0]); recordWordResult(matchPairs[b][0],false); saveState();
-    const ma=matchSelected, mb=el;
-    setTimeout(()=>{ ma.classList.remove('wrong-match'); mb.classList.remove('wrong-match'); },600);
-    matchSelected=null;
+    matchSelected.classList.add('wrong-match');el.classList.add('wrong-match');
+    mistakes.add(matchPairs[b][0]);recordWordResult(matchPairs[b][0],false);saveState();
+    const ma=matchSelected,mb=el;setTimeout(()=>{ma.classList.remove('wrong-match');mb.classList.remove('wrong-match');},600);matchSelected=null;
   }
 }
 
@@ -545,230 +554,146 @@ function matchClick(el){
 function showResult(mode){
   const area=document.getElementById('game-area');
   let score,total,emoji,title,sub;
-  if(mode==='flashcard'){ score=learned.size; total=currentDeck.length; emoji='🃏'; title='Alle kaartjes gedaan!'; sub=`Je kende ${score} van de ${total} woordjes.`; }
-  else if(mode==='quiz'||mode==='mistakes'){ score=quizScore; total=quizTotal; const p=Math.round(score/total*100); emoji=p>=80?'🏆':p>=50?'👍':'💪'; title=p>=80?'Geweldig!':p>=50?'Goed bezig!':'Blijven oefenen!'; sub=`Je had ${score} van de ${total} vragen goed (${p}%)`; }
-  else if(mode==='type'){ score=typeScore; total=typeDeck.length; const p=Math.round(score/total*100); emoji=p>=80?'🏆':p>=50?'👍':'💪'; title=p>=80?'Waanzinnig!':p>=50?'Goed gedaan!':'Nog even oefenen!'; sub=`Je typte ${score} van de ${total} woordjes goed (${p}%)`; }
-  else if(mode==='match'){ emoji='🧩'; title='Alle woordjes gekoppeld!'; score=matchPairs.length; total=matchPairs.length; sub=`Goed gedaan! Je hebt alle ${total} koppels gevonden.`; }
+  if(mode==='flashcard'){score=activeWords.filter(w=>learned.has(w[0])).length;total=currentDeck.length;emoji='🃏';title='Alle kaartjes gedaan!';sub=`Je kende ${score} van de ${total} woordjes.`;}
+  else if(mode==='quiz'||mode==='mistakes'){score=quizScore;total=quizTotal;const p=Math.round(score/total*100);emoji=p>=80?'🏆':p>=50?'👍':'💪';title=p>=80?'Geweldig!':p>=50?'Goed bezig!':'Blijven oefenen!';sub=`Je had ${score} van de ${total} vragen goed (${p}%)`;}
+  else if(mode==='type'){score=typeScore;total=typeDeck.length;const p=Math.round(score/total*100);emoji=p>=80?'🏆':p>=50?'👍':'💪';title=p>=80?'Waanzinnig!':p>=50?'Goed gedaan!':'Nog even oefenen!';sub=`Je typte ${score} van de ${total} woordjes goed (${p}%)`;}
+  else if(mode==='match'){emoji='🧩';title='Alle woordjes gekoppeld!';score=matchPairs.length;total=matchPairs.length;sub=`Goed gedaan! Je hebt alle ${total} koppels gevonden.`;}
+  const mistakesInSet=activeWords.filter(w=>mistakes.has(w[0])).length;
   area.innerHTML=`
     <div class="result-screen">
       <div class="trophy">${emoji}</div>
       <h2>${title}</h2>
       <div class="score-big">${score}/${total}</div>
       <p style="margin-top:8px">${sub}</p>
-      ${mistakes.size>0?`<p style="color:var(--danger);font-size:0.9rem;margin-top:8px">Je hebt nog <strong>${mistakes.size}</strong> fout gegane woordjes.</p>`:'<p style="color:var(--success);font-weight:800;margin-top:8px">🎉 Je hebt geen fouten meer!</p>'}
+      ${mistakesInSet>0?`<p style="color:var(--danger);font-size:0.88rem;margin-top:8px">Je hebt nog <strong>${mistakesInSet}</strong> fout gegane woordjes.</p>`:'<p style="color:var(--success);font-weight:800;margin-top:8px">🎉 Je hebt geen fouten meer!</p>'}
       <div class="result-actions">
         <button class="action-btn btn-primary" onclick="initCurrentMode()">Opnieuw 🔄</button>
-        ${mistakes.size>0?`<button class="action-btn btn-wrong" onclick="switchMode('mistakes')">Oefen fouten 🔁</button>`:''}
-        <button class="action-btn btn-secondary" onclick="switchMode('flashcard')">Flashcards 🃏</button>
+        ${mistakesInSet>0?`<button class="action-btn btn-wrong" onclick="switchMode('mistakes')">Oefen fouten 🔁</button>`:''}
+        <button class="action-btn btn-secondary" onclick="showThemePicker()">← Andere set</button>
       </div>
     </div>`;
 }
 
 // ===== PARENT DASHBOARD =====
-let pinBuffer='';
-let dashTab='overview';
-
-function openParent(){
-  pinBuffer='';
-  document.getElementById('parent-overlay').classList.add('show');
-  renderPinScreen();
-}
-function closeParent(){ document.getElementById('parent-overlay').classList.remove('show'); }
-
+function openParent(){pinBuffer='';document.getElementById('parent-overlay').classList.add('show');renderPinScreen();}
+function closeParent(){document.getElementById('parent-overlay').classList.remove('show');}
 function renderPinScreen(){
-  const body=document.getElementById('parent-body');
-  body.innerHTML=`
+  document.getElementById('parent-body').innerHTML=`
     <div class="pin-screen">
       <h3>🔒 Voer de pincode in</h3>
-      <p>De standaard pincode is <strong>1234</strong>. Pas het aan in de code (zoek naar <code>const PIN</code>).</p>
-      <div class="pin-dots" id="pin-dots">
-        ${[0,1,2,3].map(i=>`<div class="pin-dot" id="pd-${i}"></div>`).join('')}
-      </div>
+      <div class="pin-dots">${[0,1,2,3].map(i=>`<div class="pin-dot" id="pd-${i}"></div>`).join('')}</div>
       <div class="pin-pad">
         ${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="pin-key" onclick="pinPress('${n}')">${n}</button>`).join('')}
-        <button class="pin-key del" onclick="pinDel()">⌫</button>
+        <button class="pin-key" onclick="pinDel()">⌫</button>
         <button class="pin-key" onclick="pinPress('0')">0</button>
         <button class="pin-key" onclick="pinSubmit()">✓</button>
       </div>
       <div id="pin-err"></div>
-      <p class="pin-note">Druk op ✓ of type de 4e cijfer om in te loggen.</p>
-    </div>`;
-}
-
-function pinPress(n){
-  if(pinBuffer.length>=4) return;
-  pinBuffer+=n;
-  updatePinDots();
-  if(pinBuffer.length===4) setTimeout(pinSubmit,200);
-}
-function pinDel(){ pinBuffer=pinBuffer.slice(0,-1); updatePinDots(); }
-function updatePinDots(){
-  for(let i=0;i<4;i++){
-    const d=document.getElementById('pd-'+i);
-    if(d) d.classList.toggle('filled', i<pinBuffer.length);
-  }
-}
-function pinSubmit(){
-  if(pinBuffer===PIN) renderDashboard();
-  else {
-    document.getElementById('pin-err').innerHTML=`<p class="pin-error">Verkeerde pincode, probeer opnieuw.</p>`;
-    pinBuffer=''; updatePinDots();
-  }
-}
+    </div>`;}
+function pinPress(n){if(pinBuffer.length>=4)return;pinBuffer+=n;updatePinDots();if(pinBuffer.length===4)setTimeout(pinSubmit,200);}
+function pinDel(){pinBuffer=pinBuffer.slice(0,-1);updatePinDots();}
+function updatePinDots(){for(let i=0;i<4;i++){const d=document.getElementById('pd-'+i);if(d)d.classList.toggle('filled',i<pinBuffer.length);}}
+function pinSubmit(){if(pinBuffer===PIN)renderDashboard();else{document.getElementById('pin-err').innerHTML=`<p class="pin-error">Verkeerde pincode.</p>`;pinBuffer='';updatePinDots();}}
 
 function renderDashboard(){
-  const body=document.getElementById('parent-body');
-  body.innerHTML=`
+  document.getElementById('parent-body').innerHTML=`
     <div class="dash-tabs">
-      <button class="dash-tab ${dashTab==='overview'?'active':''}" onclick="setDashTab('overview',this)">📊 Overzicht</button>
-      <button class="dash-tab ${dashTab==='sessions'?'active':''}" onclick="setDashTab('sessions',this)">📅 Sessies</button>
-      <button class="dash-tab ${dashTab==='words'?'active':''}" onclick="setDashTab('words',this)">📝 Per woord</button>
-      <button class="dash-reset" onclick="resetData()">🗑 Reset alles</button>
+      <button class="dash-tab active" onclick="setDashTab('overview',this)">📊 Overzicht</button>
+      <button class="dash-tab" onclick="setDashTab('sessions',this)">📅 Sessies</button>
+      <button class="dash-tab" onclick="setDashTab('words',this)">📝 Per woord</button>
+      <button class="dash-reset" onclick="resetData()">🗑 Reset</button>
     </div>
     <div id="dash-content"></div>`;
-  renderDashContent();
+  dashTab='overview';renderDashContent();
 }
-
-function setDashTab(tab, el){
-  dashTab=tab;
-  document.querySelectorAll('.dash-tab').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  renderDashContent();
-}
-
+function setDashTab(tab,el){dashTab=tab;document.querySelectorAll('.dash-tab').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderDashContent();}
 function renderDashContent(){
   const c=document.getElementById('dash-content');
-  if(dashTab==='overview') c.innerHTML=renderOverview();
-  else if(dashTab==='sessions') c.innerHTML=renderSessions();
-  else if(dashTab==='words') c.innerHTML=renderWords();
+  if(dashTab==='overview')c.innerHTML=renderOverview();
+  else if(dashTab==='sessions')c.innerHTML=renderSessions();
+  else if(dashTab==='words')c.innerHTML=renderWords();
 }
-
 function renderOverview(){
-  const totalSessions=sessions.length;
   const totalAnswers=Object.values(wordStats).reduce((s,w)=>s+w.correct+w.wrong,0);
   const totalCorrect=Object.values(wordStats).reduce((s,w)=>s+w.correct,0);
   const pct=totalAnswers>0?Math.round(totalCorrect/totalAnswers*100):0;
-  const learnedCount=learned.size;
-  const hardWords=WORDS.filter(w=>wordStats[w[0]]&&wordStats[w[0]].wrong>wordStats[w[0]].correct&&wordStats[w[0]].wrong>0);
-  const lastSession=sessions[0];
-  const streak=calcStreak();
   const totalTime=sessions.reduce((s,se)=>s+(se.duration||0),0);
-  const mins=Math.floor(totalTime/60), secs=totalTime%60;
+  const mins=Math.floor(totalTime/60),secs=totalTime%60;
+  const hardWords=Object.entries(wordStats).filter(([w,s])=>s.wrong>s.correct&&s.wrong>0).sort((a,b)=>(b[1].wrong-b[1].correct)-(a[1].wrong-a[1].correct)).slice(0,8);
+
+  // Stats per thema
+  let themaStats='';
+  WOORDENLIJSTEN.forEach(t=>{
+    const l=t.woorden.filter(w=>learned.has(w[0])).length;
+    const pct2=Math.round(l/t.woorden.length*100);
+    themaStats+=`<tr><td>${t.emoji} ${t.titel}</td><td>${t.groep}</td><td>${l}/${t.woorden.length}</td><td><div style="display:flex;align-items:center;gap:6px"><div class="wt-bar-wrap"><div class="wt-bar" style="width:${pct2}%;background:${pct2>=70?'var(--success)':pct2>=40?'#ffd166':'var(--danger)'}"></div></div>${pct2}%</div></td></tr>`;
+  });
 
   return `
     <div class="dash-grid">
-      <div class="dash-card blue"><div class="dc-val">${totalSessions}</div><div class="dc-label">Oefensessies</div></div>
-      <div class="dash-card green"><div class="dc-val">${learnedCount}/${WORDS.length}</div><div class="dc-label">Woordjes geleerd</div></div>
+      <div class="dash-card blue"><div class="dc-val">${sessions.length}</div><div class="dc-label">Sessies</div></div>
+      <div class="dash-card green"><div class="dc-val">${learned.size}</div><div class="dc-label">Geleerd</div></div>
       <div class="dash-card ${pct>=70?'green':'orange'}"><div class="dc-val">${pct}%</div><div class="dc-label">Gemiddeld goed</div></div>
-      <div class="dash-card red"><div class="dc-val">${mistakes.size}</div><div class="dc-label">Nog te leren</div></div>
-      <div class="dash-card orange"><div class="dc-val">${streak}</div><div class="dc-label">Dagen op rij</div></div>
-      <div class="dash-card blue"><div class="dc-val">${mins}m ${secs}s</div><div class="dc-label">Totale oefentijd</div></div>
+      <div class="dash-card red"><div class="dc-val">${mistakes.size}</div><div class="dc-label">Te leren</div></div>
+      <div class="dash-card orange"><div class="dc-val">${calcStreak()}</div><div class="dc-label">Dagen op rij</div></div>
+      <div class="dash-card blue"><div class="dc-val">${mins}m ${secs}s</div><div class="dc-label">Oefentijd</div></div>
     </div>
-
-    ${lastSession?`
-    <div class="dash-section-title">⏱ Laatste sessie</div>
-    <div class="session-row" style="margin-bottom:20px">
-      <span class="session-mode-badge badge-${lastSession.mode}">${modeLabel(lastSession.mode)}</span>
-      <div class="session-info">
-        <div class="si-time">${formatDate(lastSession.ts)} · ${lastSession.duration||0}s</div>
-        <div class="si-score">${lastSession.score} van ${lastSession.total} goed</div>
-      </div>
-      <div class="session-score-bar"><div class="session-score-fill" style="width:${lastSession.total>0?Math.round(lastSession.score/lastSession.total*100):0}%"></div></div>
-    </div>`:''}
-
-    ${hardWords.length>0?`
-    <div class="dash-section-title">😅 Moeilijkste woorden</div>
+    <div class="dash-section-title">📚 Voortgang per thema</div>
+    <table class="word-table" style="margin-bottom:22px">
+      <tr><th>Thema</th><th>Groep</th><th>Geleerd</th><th>Voortgang</th></tr>
+      ${themaStats}
+    </table>
+    ${hardWords.length>0?`<div class="dash-section-title">😅 Moeilijkste woorden</div>
     <table class="word-table">
       <tr><th>Woord</th><th>Goed</th><th>Fout</th></tr>
-      ${hardWords.sort((a,b)=>(wordStats[b[0]].wrong-wordStats[b[0]].correct)-(wordStats[a[0]].wrong-wordStats[a[0]].correct)).slice(0,8).map(w=>`
-        <tr>
-          <td class="wt-word">${w[0]}</td>
-          <td style="color:var(--success);font-weight:800">${wordStats[w[0]].correct}✓</td>
-          <td style="color:var(--danger);font-weight:800">${wordStats[w[0]].wrong}✗</td>
-        </tr>`).join('')}
-    </table>`:`<div style="text-align:center;padding:20px;color:var(--success);font-weight:800">🎉 Geen moeilijke woorden gevonden!</div>`}`;
+      ${hardWords.map(([w,s])=>`<tr><td class="wt-word">${w}</td><td style="color:var(--success);font-weight:800">${s.correct}✓</td><td style="color:var(--danger);font-weight:800">${s.wrong}✗</td></tr>`).join('')}
+    </table>`:'<p style="text-align:center;padding:16px;color:var(--success);font-weight:800">🎉 Geen moeilijke woorden!</p>'}`;
 }
-
 function renderSessions(){
-  if(sessions.length===0) return `<div class="empty-state"><div class="big-emoji">📅</div><h3>Nog geen sessies</h3><p>Er zijn nog geen oefensessies opgeslagen.</p></div>`;
-  return `
-    <div class="dash-section-title">📅 Alle oefensessies (${sessions.length})</div>
-    <div class="sessions-list">
-      ${sessions.map(s=>`
-        <div class="session-row">
-          <span class="session-mode-badge badge-${s.mode}">${modeLabel(s.mode)}</span>
-          <div class="session-info">
-            <div class="si-time">${formatDate(s.ts)} · ${s.duration||0} seconden</div>
-            <div class="si-score">${s.score} van ${s.total} goed (${s.total>0?Math.round(s.score/s.total*100):0}%)</div>
-          </div>
-          <div class="session-score-bar"><div class="session-score-fill" style="width:${s.total>0?Math.round(s.score/s.total*100):0}%"></div></div>
-        </div>`).join('')}
-    </div>`;
-}
-
+  if(!sessions.length)return`<div class="empty-state"><div class="big-emoji">📅</div><h3>Nog geen sessies</h3></div>`;
+  return`<div class="dash-section-title">📅 Alle sessies (${sessions.length})</div>
+    <div class="sessions-list">${sessions.map(s=>`
+      <div class="session-row">
+        <span class="session-mode-badge badge-${s.mode}">${modeLabel(s.mode)}</span>
+        <div class="session-info">
+          <div class="si-time">${formatDate(s.ts)} · ${s.thema||''} · ${s.duration||0}s</div>
+          <div class="si-score">${s.score} van ${s.total} goed (${s.total>0?Math.round(s.score/s.total*100):0}%)</div>
+        </div>
+        <div class="session-score-bar"><div class="session-score-fill" style="width:${s.total>0?Math.round(s.score/s.total*100):0}%"></div></div>
+      </div>`).join('')}</div>`;}
 function renderWords(){
-  return `
-    <div class="dash-section-title">📝 Alle woordjes</div>
+  const allW=[...new Set(WOORDENLIJSTEN.flatMap(t=>t.woorden))];
+  return`<div class="dash-section-title">📝 Alle woordjes</div>
     <table class="word-table">
-      <tr><th>Woord</th><th>Goed/Fout</th><th>Score</th><th>Status</th></tr>
-      ${WORDS.map(w=>{
+      <tr><th>Woord</th><th>Thema</th><th>Goed/Fout</th><th>Status</th></tr>
+      ${WOORDENLIJSTEN.flatMap(t=>t.woorden.map(w=>{
         const st=wordStats[w[0]]||{correct:0,wrong:0};
-        const total=st.correct+st.wrong;
-        const pct=total>0?Math.round(st.correct/total*100):null;
-        const isLearned=learned.has(w[0]);
-        const isMistake=mistakes.has(w[0]);
+        const isMistake=mistakes.has(w[0]),total=st.correct+st.wrong;
         const statusClass=total===0?'status-new':isMistake?'status-hard':'status-ok';
         const statusText=total===0?'Nieuw':isMistake?'Oefenen':'Geleerd';
-        const barColor=pct===null?'#ccc':pct>=70?'var(--success)':pct>=40?'var(--accent)':'var(--danger)';
-        return `<tr>
-          <td class="wt-word">${w[0]}</td>
-          <td><span style="color:var(--success);font-weight:700">${st.correct}✓</span> <span style="color:var(--danger);font-weight:700">${st.wrong}✗</span></td>
-          <td>
-            ${pct!==null?`<div style="display:flex;align-items:center;gap:6px"><div class="wt-bar-wrap"><div class="wt-bar" style="width:${pct}%;background:${barColor}"></div></div><span style="font-size:0.78rem;font-weight:700">${pct}%</span></div>`:'<span style="color:#bbb;font-size:0.78rem">—</span>'}
-          </td>
-          <td><span class="wt-status ${statusClass}">${statusText}</span></td>
-        </tr>`;
-      }).join('')}
-    </table>`;
-}
+        return`<tr><td class="wt-word">${w[0]}</td><td style="font-size:0.75rem;color:var(--text-light)">${t.emoji} ${t.titel}</td><td><span style="color:var(--success);font-weight:700">${st.correct}✓</span> <span style="color:var(--danger);font-weight:700">${st.wrong}✗</span></td><td><span class="wt-status ${statusClass}">${statusText}</span></td></tr>`;
+      })).join('')}
+    </table>`;}
 
 function calcStreak(){
-  if(sessions.length===0) return 0;
+  if(!sessions.length)return 0;
   const days=new Set(sessions.map(s=>new Date(s.ts).toDateString()));
-  let streak=0, d=new Date();
-  while(days.has(d.toDateString())){ streak++; d.setDate(d.getDate()-1); }
+  let streak=0,d=new Date();
+  while(days.has(d.toDateString())){streak++;d.setDate(d.getDate()-1);}
   return streak;
 }
-
 function formatDate(ts){
-  const d=new Date(ts);
-  const now=new Date();
-  const diffMs=now-d;
-  const diffMin=Math.floor(diffMs/60000);
-  if(diffMin<1) return 'zojuist';
-  if(diffMin<60) return `${diffMin} min geleden`;
-  if(diffMin<1440) return `${Math.floor(diffMin/60)}u geleden`;
+  const d=new Date(ts),now=new Date(),diffMin=Math.floor((now-d)/60000);
+  if(diffMin<1)return'zojuist';if(diffMin<60)return`${diffMin}m geleden`;if(diffMin<1440)return`${Math.floor(diffMin/60)}u geleden`;
   return d.toLocaleDateString('nl-NL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
 }
+function modeLabel(m){return{flashcard:'🃏 Flashcard',quiz:'🧠 Quiz',type:'✍️ Typen',match:'🧩 Koppelen',mistakes:'🔁 Fouten'}[m]||m;}
+function resetData(){if(!confirm('Weet je zeker dat je alle voortgang wilt wissen?'))return;localStorage.removeItem('wl_mistakes');localStorage.removeItem('wl_learned');localStorage.removeItem('wl_wordstats');localStorage.removeItem('wl_sessions');mistakes=new Set();learned=new Set();wordStats={};sessions=[];renderDashboard();}
+function esc(s){return s.replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
-function modeLabel(m){
-  return {flashcard:'🃏 Flashcard',quiz:'🧠 Quiz',type:'✍️ Typen',match:'🧩 Koppelen',mistakes:'🔁 Fouten'}[m]||m;
-}
-
-function resetData(){
-  if(!confirm('Weet je zeker dat je alle voortgang wilt wissen?')) return;
-  localStorage.removeItem('wl_mistakes'); localStorage.removeItem('wl_learned');
-  localStorage.removeItem('wl_wordstats'); localStorage.removeItem('wl_sessions');
-  mistakes=new Set(); learned=new Set(); wordStats={}; sessions=[];
-  updateStats(); renderDashboard();
-}
-
-function esc(s){ return s.replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
-function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a; }
-
-// INIT
-updateStats();
-initCurrentMode();
+// START
+showThemePicker();
 </script>
 </body>
 </html>
